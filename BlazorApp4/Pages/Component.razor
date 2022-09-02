@@ -1,0 +1,22 @@
+﻿@if (string.IsNullOrEmpty(_message))
+{
+    <h3>Loading...</h3>
+}
+else
+{
+    <h3>@_message</h3>
+}
+
+@code {
+    [Parameter]
+    public int Delay { get; set; }
+
+    private string _message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(Delay);
+
+        _message = "Done";
+    }
+}

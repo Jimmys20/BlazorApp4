@@ -1,0 +1,17 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<PageTitle>Index</PageTitle>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var module = await JS.InvokeAsync<IJSObjectReference>("import",
+              "./js/snarkJsInteropHelper.js");
+
+            await module.InvokeVoidAsync("calculateProof");
+        }
+    }
+}
